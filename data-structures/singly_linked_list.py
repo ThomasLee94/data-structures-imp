@@ -13,15 +13,15 @@ class SinglyLinkedList:
 
         if iterable:
             for data in iterable:
-                self.append(node(data))
+                self.append(Node(data))
 
-    def insert_at_index():
-        pass
-
-    def prepend():
+    def prepend(node):
         pass
 
     def append():
+        pass
+
+    def insert_at_index():
         pass
 
     def delete():
