@@ -1,0 +1,34 @@
+Data Structures
+===============
+  
+[ ] Stack
+[ ] Singly Linked List
+[ ] Doubly-Circular Linked List
+[ ] Queue
+[ ] Circular Buffer
+[ ] Binary Search Tree
+[ ] Heap (max or min)
+* [ ] Bit Map
+[ ] Hash Map
+[ ] Hash Set
+* [ ] Tree Set
+* [ ] Bloom Filter
+* [ ] Priority Queue
+* [ ] 2:3 tree
+* [ ] B-Tree
+* [ ] Matrix-stored graphs
+* [ ] Reference-stored graphs
+
+
+Sorting Algorithms
+==================
+
+[ ] Selection Sort
+* [ ] Gnome Sort
+[ ] Insertion Sort
+[ ] Heap Sort
+[ ] Quick Sort
+[ ] Merge Sort
+[ ] Radix Sort
+* [ ] Intro Sort
+* [ ] Tim Sort
