@@ -15,8 +15,10 @@ class SinglyLinkedList:
             for data in iterable:
                 self.append(Node(data))
 
-    def prepend(node):
-        pass
+    def prepend(self, node):
+        node.next = self.head
+        self.head = node
+        self.head.next.head = None
 
     def append():
         pass
