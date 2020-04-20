@@ -10,18 +10,21 @@ class SinglyLinkedList:
         self.head = None
         self.tail = None
         self.size = 0
-
+        
         if iterable:
             for data in iterable:
-                self.append(Node(data))
+                self.append(data)
 
-    def prepend(self, node):
-        node.next = self.head
-        self.head = node
-        self.head.next.head = None
+    def prepend(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
 
-    def append():
-        pass
+    def append(self, data):
+        new_node = Node(data)
+        node = self.tail
+        node.next = new_node
+        self.tail = new_node
 
     def insert_at_index():
         pass
