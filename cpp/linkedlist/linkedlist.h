@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "linkedlist/node.h"
+#include "node.h"
 
 namespace linkedlist{ 
 
@@ -18,6 +18,7 @@ class LinkedList {
   void prepend(int item); // prepends the given item to the beginning of the ll
   void insert(int item, int index); // inserts the given item at the given index of ll
   void delete_(int item); // deletes node containing given item, throws error otherwise.
+  void reverse_(); // reverse the linked list
 
   Node *head;
   Node *tail;

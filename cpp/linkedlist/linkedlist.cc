@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "linkedlist/node.h"
+#include "node.h"
 
 namespace linkedlist {
 
@@ -18,7 +18,7 @@ LinkedList::LinkedList(const std::vector<int>& data) {
   }
 }
 
-bool LinkedList::is_empty() const {
+bool LinkedList::is_empty() {
   /*
    * returns true if linked list is empty,
    * returns false if it contains one or more items.
@@ -183,6 +183,22 @@ void LinkedList::delete_(int item){
   } else {
     throw std::invalid_argument("item not in linked list");
   }
+}
+
+void LinkedList::reverse_(){
+    Node* previous_node = nullptr;
+    Node* current_node = head;
+
+    while (current_node->next != nullptr){
+        Node* next_node = current_node->next;
+        
+        current_node->next = previous_node;
+
+        previous_node = current_node;
+        current_node = next_node;
+
+    }
+    
 }
 
 } // namespace linkedlist
