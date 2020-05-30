@@ -36,7 +36,7 @@ class LinkedListTest(unittest.TestCase):
         assert ll.items() == ['A', 'B', 'C']
 
     def test_length(self):
-        ll = SinglyhLinkedList()
+        ll = SinglyLinkedList()
         assert ll.length() == 0
         # append and prepend operations increase length
         ll.append('B')

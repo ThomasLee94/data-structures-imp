@@ -17,15 +17,36 @@ class SinglyLinkedList:
     def is_empty(self):
         return self.head is None
 
-    def prepend(self, data):
+    def items(self):
+        node = self.head
+        output = list()
+
+        for _ in range(self.size):
+            output.append(node.data)
+            node = node.next
+
+        return output
+
+    def length(self):
+        return self.size
+
+    def replace(self, old, new):
+        node = self.head
+
+        for _ in range(self.size):
+            if node.data == old:
+                node.data = new
+                return
+            node = node.next
+        raise ValueError("item does not exist")
+
+    def prepend(self, item):
         new_node = Node(item)
 
         if self.is_empty():
-            # Assign tail to new node
             self.tail = new_node
             self.size += 1
         else:
-            # Otherwise insert new node before head
             new_node.next = self.head
             self.size += 1
         self.head = new_node
@@ -33,17 +54,39 @@ class SinglyLinkedList:
     def append(self, data):
         new_node = Node(data)
 
-        node = self.head
-        while node.next is not None:
-            node = node.next
+        if self.is_empty():
+            self.head = new_node
+            self.size += 1
+        else:
+            self.tail.next = new_node
+            self.size += 1
+        self.tail = new_node
 
-        node.next = new_node
+    def find(self, quality):
+        node = self.head
+        while node is not None:
+            if quality(node.data):
+                return node.data
+            node = node.next
+        return None
+
+    def get_at_index(self, index):
+        if not (0 <= index < self.size):
+            raise ValueError('List index out of range: {}'.format(index))
+
+        node = self.head
+
+        for _ in range(index):
+            node = node.next
+        return node.data
+
 
     def node_at_index(self, index):
         if not (0 <= index < self.size):
-            raise ValueError("List index out of range")
+            raise ValueError('List index out of range: {}'.format(index))
 
         node = self.head
+
         for _ in range(index):
             node = node.next
         return node
@@ -54,13 +97,16 @@ class SinglyLinkedList:
 
         if index == 0:
             self.prepend(item)
+            return
 
         if index == self.size:
             self.append(item)
+            return
+
         else:
             new_node = Node(item)
-            index_node = self.node_at_index(index)
             previous_node = self.node_at_index(index - 1)
+            index_node = self.node_at_index(index)
 
             new_node.next = index_node
             previous_node.next = new_node
@@ -68,18 +114,36 @@ class SinglyLinkedList:
             self.size += 1
 
     def delete(self, item):
-        
+
         node = self.head
-        previous_node = None
-        next_node = None
+        previous = None
+        found = False
 
-        for _ in range(self.size):
-            previous_node = node
-            
+        while not found and node is not None:
             if node.data == item:
-                break
-            node = node.next
+                found = True
+            else:
+                previous = node
+                node = node.next
 
+        if found:
+            if node is not self.head and node is not self.tail:
+                previous.next = node.next
+                node.next = None
+                self.size -= 1
+
+            if node is self.head:
+                self.head = node.next
+                node.next = None
+                self.size -= 1
+
+            if node is self.tail:
+                if previous is not None:
+                    previous.next = None
+                    self.size -= 1
+                self.tail = previous
+        else:
+            raise ValueError('Item not found: {}'.format(item))
 
 
     def reverse(self):
