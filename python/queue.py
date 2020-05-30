@@ -1,29 +1,25 @@
-from singly_linked_list import SinglyLinkedList
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
 
-class Queue(object):
+class Queue:
     """
         Queue will be implemented with a linked list as the start
-        of the queue as the head, and the end of the queue as the tail.
+        of the queue as the tail, and the end of the queue as the head.
         This way, enqueue's and dequeue's are O(1).
 
         Enqueue is appending from the tail, dequeueing is reassigning
         the pointer of the head to None.
     """
     def __init__(self, iterable=None):
-        self.queue = SinglyLinkedList()
+        self.head = None
+        self.tail = None
+        self.size = 0
+
         if iterable:
             for data in iterable:
-                self.enqueue(data)
-
-    def is_empty(self):
-        if self.queue.size < 1:
-            return True
-        return False
-
-    def front(self):
-        if self.is_empty():
-            return None
-        return self.head.data
+                self.append(data)
 
     def append(self, data):
         new_node = Node(data)
@@ -33,14 +29,14 @@ class Queue(object):
             node = node.next
 
         node.next = new_node
-        self.length += 1
 
     def enqueue(self, data):
-        self.tail.append(data)
+        node = self.tail
+
+        node.append(data)
 
     def dequeue(self):
         next_node = self.head.next
 
         self.head.next = None
         self.head = next_node
-        self.length -= 1

@@ -5,7 +5,6 @@ class Node:
 
 
 class SinglyLinkedList:
-
     def __init__(self, iterable=None):
         self.head = None
         self.tail = None
@@ -15,22 +14,73 @@ class SinglyLinkedList:
             for data in iterable:
                 self.append(data)
 
+    def is_empty(self):
+        return self.head is None
+
     def prepend(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
+        new_node = Node(item)
+
+        if self.is_empty():
+            # Assign tail to new node
+            self.tail = new_node
+            self.size += 1
+        else:
+            # Otherwise insert new node before head
+            new_node.next = self.head
+            self.size += 1
         self.head = new_node
 
     def append(self, data):
         new_node = Node(data)
-        node = self.tail
+
+        node = self.head
+        while node.next is not None:
+            node = node.next
+
         node.next = new_node
-        self.tail = new_node
 
-    def insert_at_index(self):
-        pass
+    def node_at_index(self, index):
+        if not (0 <= index < self.size):
+            raise ValueError("List index out of range")
 
-    def delete(self):
-        pass
+        node = self.head
+        for _ in range(index):
+            node = node.next
+        return node
+
+    def insert_at_index(self, index, item):
+        if not (0 <= index <= self.size):
+            raise ValueError('List index out of range')
+
+        if index == 0:
+            self.prepend(item)
+
+        if index == self.size:
+            self.append(item)
+        else:
+            new_node = Node(item)
+            index_node = self.node_at_index(index)
+            previous_node = self.node_at_index(index - 1)
+
+            new_node.next = index_node
+            previous_node.next = new_node
+
+            self.size += 1
+
+    def delete(self, item):
+        
+        node = self.head
+        previous_node = None
+        next_node = None
+
+        for _ in range(self.size):
+            previous_node = node
+            
+            if node.data == item:
+                break
+            node = node.next
+
+
 
     def reverse(self):
         prev_node = None
