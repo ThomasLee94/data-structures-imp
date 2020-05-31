@@ -1,7 +1,4 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+from singly_linked_list import SinglyLinkedList
 
 class Queue:
     """
@@ -13,30 +10,32 @@ class Queue:
         the pointer of the head to None.
     """
     def __init__(self, iterable=None):
-        self.head = None
-        self.tail = None
-        self.size = 0
+        self.queue = SinglyLinkedList()
 
         if iterable:
-            for data in iterable:
-                self.append(data)
+            for item in iterable:
+                self.queue.append(item)
 
-    def append(self, data):
-        new_node = Node(data)
+    def is_empty(self):
+        return self.queue.is_empty()
 
-        node = self.head
-        while node.next is not None:
-            node = node.next
+    def length(self):
+        return self.queue.size
 
-        node.next = new_node
+    def front(self):
+        if self.queue.is_empty():
+            return None
+        return self.queue.head.data
 
     def enqueue(self, data):
-        node = self.tail
-
-        node.append(data)
+        self.queue.append(data)
 
     def dequeue(self):
-        next_node = self.head.next
+        if self.queue.size < 1:
+            raise ValueError("queue is empty")
 
-        self.head.next = None
-        self.head = next_node
+        output = self.front()
+
+        self.queue.delete(output)
+
+        return output
