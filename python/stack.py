@@ -1,46 +1,45 @@
 from singly_linked_list import SinglyLinkedList
 
-class Queue(object):
+class Stack(object):
     """
-        Queue will be implemented with a linked list as the start
-        of the queue as the head, and the end of the queue as the tail.
-        This way, enqueue's and dequeue's are O(1).
+        Stack implementation with linkedlist. The top of
+        the stack is the head, the bottom of the stack is the tail.
 
-        Enqueue is appending from the tail, dequeueing is reassigning
-        the pointer of the head to None.
+        push - prepend, O(1)
+        pop - change pointer of head, O(1)
+        peek - O(1)
     """
+
     def __init__(self, iterable=None):
-        self.queue = SinglyLinkedList()
+        self.stack = SinglyLinkedList()
+
         if iterable:
             for data in iterable:
-                self.enqueue(data)
+                self.stack.prepend(data)
 
     def is_empty(self):
-        if self.queue.size < 1:
+        if self.stack.size < 1:
             return True
         return False
 
-    def front(self):
-        if self.is_empty():
+    def length(self):
+        return self.stack.size
+
+    def push(self, item):
+        self.stack.prepend(item)
+
+    def pop(self):
+        if self.stack.length() == 0:
+            raise ValueError('Linked list length is 0')
+
+        if self.stack.is_empty():
+            raise ValueError("Node is empty")
+
+        item = self.stack.head.data
+        self.stack.delete(item)
+        return item
+
+    def peek(self):
+        if self.stack.is_empty():
             return None
-        return self.head.data
-
-    def append(self, data):
-        new_node = Node(data)
-
-        node = self.head
-        while node.next is not None:
-            node = node.next
-
-        node.next = new_node
-        self.length += 1
-
-    def enqueue(self, data):
-        self.tail.append(data)
-
-    def dequeue(self):
-        next_node = self.head.next
-
-        self.head.next = None
-        self.head = next_node
-        self.length -= 1
+        return self.stack.head.data
